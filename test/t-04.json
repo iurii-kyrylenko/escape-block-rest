@@ -1,0 +1,13 @@
+{
+  "board": [
+    { "dir": "h", "len": 2, "row": 0 },
+    { "dir": "h", "len": 2, "row": 2 },
+    { "dir": "h", "len": 2, "row": 4 },
+    { "dir": "h", "len": 3, "row": 5 },
+    { "dir": "v", "len": 3, "row": 0 },
+    { "dir": "v", "len": 3, "row": 2 },
+    { "dir": "v", "len": 2, "row": 3 },
+    { "dir": "v", "len": 3, "row": 5 }
+  ],
+  "state": [3,0,2,2,3,0,1,1]
+}

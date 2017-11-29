@@ -1,7 +1,6 @@
 module Main where
 
-import Lib
--- import Serialization
+import Server
 
 main :: IO ()
 main = runServer

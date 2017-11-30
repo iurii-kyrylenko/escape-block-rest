@@ -42,18 +42,18 @@ routes = do
   W.get "/" $ do
     W.text "=== ESCAPE BLOCK SOLVER ==="
 
-  -- curl -X POST -d @test/01.json http://localhost:5000/backtrack
-  W.post "/backtrack" $ do
+  -- curl -X GET -d @test/01.json http://localhost:5000/backtrack
+  W.get "/backtrack" $ do
     Start board state (Target index position) <- W.jsonData :: W.ActionM Start
     W.json $ bfsBacktrack (nextState board) ((position ==) . (!! index)) state
 
-  -- curl -X POST -d @test/01.json http://localhost:5000/backtrack-length
-  W.post "/backtrack-length" $ do
+  -- curl -X GET -d @test/01.json http://localhost:5000/backtrack-length
+  W.get "/backtrack-length" $ do
     Start board state (Target index position) <- W.jsonData :: W.ActionM Start
     W.json . length $ bfsBacktrack (nextState board) ((position ==) . (!! index)) state
 
-  -- curl -X POST -d @test/01.json http://localhost:5000/length
-  W.post "/length" $ do
+  -- curl -X GET -d @test/01.json http://localhost:5000/length
+  W.get "/length" $ do
     Start board state _ <- W.jsonData :: W.ActionM Start
     W.json . length $ bfs (nextState board) state
 

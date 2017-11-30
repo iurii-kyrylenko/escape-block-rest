@@ -1,10 +1,10 @@
-name:                my-rest
+name:                escape-block-rest
 version:             0.1.0.0
 -- synopsis:
 -- description:
-homepage:            https://github.com/iurii-kyrylenko/my-rest#readme
+homepage:            https://github.com/iurii-kyrylenko/escape-block-rest#readme
 license:             BSD3
-license-file:        LICENSE
+license-file:        LICENSE.md
 author:              Iurii Kyrylenko
 maintainer:          https://github.com/iurii-kyrylenko
 copyright:           2017 Iurii Kyrylenko
@@ -25,23 +25,23 @@ library
                      , containers
   default-language:    Haskell2010
 
-executable my-rest-exe
+executable escape-block-rest-exe
   hs-source-dirs:      app
   main-is:             Main.hs
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
-                     , my-rest
+                     , escape-block-rest
   default-language:    Haskell2010
 
-test-suite my-rest-test
+test-suite escape-block-rest-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             Spec.hs
   build-depends:       base
-                     , my-rest
+                     , escape-block-rest
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   default-language:    Haskell2010
 
 source-repository head
   type:     git
-  location: https://github.com/iurii-kyrylenko/my-rest
+  location: https://github.com/iurii-kyrylenko/escape-block-rest

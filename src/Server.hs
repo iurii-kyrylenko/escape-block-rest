@@ -8,7 +8,6 @@ module Server
 import qualified Web.Scotty as W
 import Data.Aeson
 import GHC.Generics
-
 import State
 import Bfs
 
@@ -24,21 +23,40 @@ instance FromJSON Block where
       "v" -> V <$> o .: "len" <*> o .: "row"
       _   -> fail ("unknown dir: " ++ dir)
 
-data Start = Start { board :: Board, state :: State } deriving (Show, Generic)
+data Target = Target { index :: Int, position :: Int } deriving (Show, Generic)
+instance ToJSON Target
+instance FromJSON Target
+
+data Start = Start
+  { board :: Board
+  , state :: State
+  , target :: Target
+  } deriving (Show, Generic)
 
 instance ToJSON Start
 instance FromJSON Start
-      
+
 routes :: W.ScottyM ()
 routes = do
   -- curl http://localhost:5000/
   W.get "/" $ do
     W.text "=== ESCAPE BLOCK SOLVER ==="
-  -- curl -X POST -d @test/t-01.json http://localhost:5000/start
-  W.post "/start" $ do
-    Start { board = b, state = s } <- W.jsonData :: W.ActionM Start
-    W.json $ bfsBacktrack (nextState b) ((4 ==) . (!! 1)) s
-  
+
+  -- curl -X POST -d @test/01.json http://localhost:5000/backtrack
+  W.post "/backtrack" $ do
+    Start board state (Target index position) <- W.jsonData :: W.ActionM Start
+    W.json $ bfsBacktrack (nextState board) ((position ==) . (!! index)) state
+
+  -- curl -X POST -d @test/01.json http://localhost:5000/backtrack-length
+  W.post "/backtrack-length" $ do
+    Start board state (Target index position) <- W.jsonData :: W.ActionM Start
+    W.json . length $ bfsBacktrack (nextState board) ((position ==) . (!! index)) state
+
+  -- curl -X POST -d @test/01.json http://localhost:5000/length
+  W.post "/length" $ do
+    Start board state _ <- W.jsonData :: W.ActionM Start
+    W.json . length $ bfs (nextState board) state
+
 runServer :: IO ()
 runServer = do
   putStrLn "starting Server..."

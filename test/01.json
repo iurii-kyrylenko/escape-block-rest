@@ -1,0 +1,17 @@
+{
+  "board": [
+    { "dir": "h", "len": 2, "row": 1 },
+    { "dir": "h", "len": 2, "row": 2 },
+    { "dir": "h", "len": 3, "row": 3 },
+    { "dir": "h", "len": 2, "row": 5 },
+    { "dir": "h", "len": 2, "row": 5 },
+    { "dir": "v", "len": 3, "row": 0 },
+    { "dir": "v", "len": 2, "row": 2 },
+    { "dir": "v", "len": 2, "row": 3 },
+    { "dir": "v", "len": 3, "row": 4 },
+    { "dir": "v", "len": 2, "row": 5 },
+    { "dir": "v", "len": 2, "row": 5 }
+  ],
+  "state": [1,2,0,0,3,0,4,0,2,0,3],
+  "target": { "index": 1, "position": 4 }
+}

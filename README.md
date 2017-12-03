@@ -109,3 +109,36 @@ curl -X GET -d @test/01.json http://localhost:5000/backtrack
   [0,4,1,0,2,2,0,0,3,0,4]  // finish state
 ]
 ```
+
+### Build docker image (esc-block)
+> docker build -t esc-block .
+
+### Start new container from the esc-block image
+> docker run -p 5000:5000 -d --name esc-block esc-block
+
+### Copy executable from container to the prod direcory
+> docker cp esc-block:/opt/escape-block-rest/bin/escape-block-rest-exe ./prod/escape-block-rest-exe
+
+### Build production docker image (esc-block-prod)
+> cd prod
+
+> docker build -t esc-block-prod .
+
+### Start new container from the esc-block-prod image
+> docker run -p 5000:5000 -d --name esc-block-prod esc-block-prod
+
+### Deploy on Heroku (https://arow.info/blog/posts/2017-03-30-servant-on-heroku.html)
+```
+> heroku plugins:install heroku-container-registry
+> heroku login
+> heroku apps:create esc-block
+> heroku apps:info esc-block
+> heroku container
+> heroku container:login
+> heroku container:push web --app esc-block
+> heroku ps:scale web=1 --app esc-block
+> heroku apps:info esc-block
+```
+
+### TO DO:
+Get port from env variable

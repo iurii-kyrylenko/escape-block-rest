@@ -145,3 +145,28 @@ curl -X GET -d @test/01.json http://localhost:5000/backtrack
 > heroku ps:scale web=1 --app esc-block
 > heroku apps:info esc-block
 ```
+### Dev cycle
+- make changes and test on dev host
+- run container with dev environment:
+  - docker run -d --name esc-block esc-block
+- stop container:
+  - docker stop esc-block
+- copy changes from dev host to container, e.g.:
+  - docker cp ./escape-block-rest.cabal esc-block:/opt/escape-block-rest/src/escape-block-rest.cabal
+  - docker cp ./src/Server.hs esc-block:/opt/escape-block-rest/src/src/Server.hs
+- start container:
+  - docker start esc-block
+- go inside container:
+  - docker exec -it esc-block bash
+- build app inside container: stack build
+- install app binary inside container:
+  - stack --local-bin-path /opt/escape-block-rest/bin install
+- exit container
+- copy binary from container to the prod directory:
+  - docker cp esc-block:/opt/escape-block-rest/bin/escape-block-rest-exe ./prod/escape-block-rest-exe
+- build prod image:
+  - cd prod/
+  - docker build -t esc-block-prod .
+- deploy to heroku:
+  - heroku container:login
+  - heroku container:push web --app esc-block

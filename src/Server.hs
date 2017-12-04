@@ -6,6 +6,7 @@ module Server
   ) where
 
 import System.ReadEnvVar (readEnvDef)
+import Network.Wai.Middleware.Cors
 import qualified Web.Scotty as W
 import Data.Aeson
 import GHC.Generics
@@ -39,6 +40,9 @@ instance FromJSON Start
 
 routes :: W.ScottyM ()
 routes = do
+  -- enable CORS
+  W.middleware simpleCors
+
   -- curl http://localhost:5000/
   W.get "/" $ do
     W.text "=== ESCAPE BLOCK SOLVER ==="

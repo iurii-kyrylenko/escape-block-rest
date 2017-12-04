@@ -145,6 +145,3 @@ curl -X GET -d @test/01.json http://localhost:5000/backtrack
 > heroku ps:scale web=1 --app esc-block
 > heroku apps:info esc-block
 ```
-
-### TO DO:
-Get port from env variable

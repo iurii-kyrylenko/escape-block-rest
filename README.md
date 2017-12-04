@@ -3,7 +3,10 @@
 ## Escape Block Puzzle | Breadth First Search Algorithm | Haskell | REST API based on [Scotty](https://github.com/scotty-web/scotty) and [Aeson](https://github.com/bos/aeson)
 
 ## Demo
-https://esc-block.herokuapp.com/
+ - > https://esc-block.herokuapp.com/
+ - > `curl -X GET -d "{\"board\":[{\"dir\":\"h\",\"len\":2,\"row\":1},{\"dir\":\"h\",\"len\":2,\"row\":2},{\"dir\":\"h\",\"len\":3,\"row\":3},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":3,\"row\":0},{\"dir\":\"v\",\"len\":2,\"row\":2},{\"dir\":\"v\",\"len\":2,\"row\":3},{\"dir\":\"v\",\"len\":3,\"row\":4},{\"dir\":\"v\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":2,\"row\":5}],\"state\":[1,2,0,0,3,0,4,0,2,0,3],\"target\":{\"index\":1,\"position\":4}}" https://esc-block.herokuapp.com/backtrack`
+ - > `curl -X GET -d "{\"board\":[{\"dir\":\"h\",\"len\":2,\"row\":1},{\"dir\":\"h\",\"len\":2,\"row\":2},{\"dir\":\"h\",\"len\":3,\"row\":3},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":3,\"row\":0},{\"dir\":\"v\",\"len\":2,\"row\":2},{\"dir\":\"v\",\"len\":2,\"row\":3},{\"dir\":\"v\",\"len\":3,\"row\":4},{\"dir\":\"v\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":2,\"row\":5}],\"state\":[1,2,0,0,3,0,4,0,2,0,3],\"target\":{\"index\":1,\"position\":4}}" https://esc-block.herokuapp.com/backtrack-length`
+ - > `curl -X GET -d "{\"board\":[{\"dir\":\"h\",\"len\":2,\"row\":1},{\"dir\":\"h\",\"len\":2,\"row\":2},{\"dir\":\"h\",\"len\":3,\"row\":3},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":3,\"row\":0},{\"dir\":\"v\",\"len\":2,\"row\":2},{\"dir\":\"v\",\"len\":2,\"row\":3},{\"dir\":\"v\",\"len\":3,\"row\":4},{\"dir\":\"v\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":2,\"row\":5}],\"state\":[1,2,0,0,3,0,4,0,2,0,3],\"target\":{\"index\":1,\"position\":4}}" https://esc-block.herokuapp.com/length`
 
 ### Build project
 > stack setup

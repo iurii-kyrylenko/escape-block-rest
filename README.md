@@ -2,6 +2,9 @@
 
 ## Escape Block Puzzle | Breadth First Search Algorithm | Haskell | REST API based on [Scotty](https://github.com/scotty-web/scotty) and [Aeson](https://github.com/bos/aeson)
 
+## Demo
+https://esc-block.herokuapp.com/
+
 ### Build project
 > stack setup
 

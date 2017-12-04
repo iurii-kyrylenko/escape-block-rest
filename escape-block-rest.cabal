@@ -23,6 +23,7 @@ library
                      , aeson
                      , hashmap
                      , containers
+                     , read-env-var
   default-language:    Haskell2010
 
 executable escape-block-rest-exe

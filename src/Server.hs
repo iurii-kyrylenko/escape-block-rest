@@ -5,6 +5,7 @@ module Server
   ( runServer
   ) where
 
+import System.ReadEnvVar (readEnvDef)
 import qualified Web.Scotty as W
 import Data.Aeson
 import GHC.Generics
@@ -59,5 +60,6 @@ routes = do
 
 runServer :: IO ()
 runServer = do
+  port <- readEnvDef "PORT" 5000
   putStrLn "starting Server..."
-  W.scotty 5000 routes
+  W.scotty port routes

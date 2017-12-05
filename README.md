@@ -4,9 +4,9 @@
 
 ## Demo
  - > https://esc-block.herokuapp.com/
- - > `curl -X GET -d "{\"board\":[{\"dir\":\"h\",\"len\":2,\"row\":1},{\"dir\":\"h\",\"len\":2,\"row\":2},{\"dir\":\"h\",\"len\":3,\"row\":3},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":3,\"row\":0},{\"dir\":\"v\",\"len\":2,\"row\":2},{\"dir\":\"v\",\"len\":2,\"row\":3},{\"dir\":\"v\",\"len\":3,\"row\":4},{\"dir\":\"v\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":2,\"row\":5}],\"state\":[1,2,0,0,3,0,4,0,2,0,3],\"target\":{\"index\":1,\"position\":4}}" https://esc-block.herokuapp.com/backtrack`
- - > `curl -X GET -d "{\"board\":[{\"dir\":\"h\",\"len\":2,\"row\":1},{\"dir\":\"h\",\"len\":2,\"row\":2},{\"dir\":\"h\",\"len\":3,\"row\":3},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":3,\"row\":0},{\"dir\":\"v\",\"len\":2,\"row\":2},{\"dir\":\"v\",\"len\":2,\"row\":3},{\"dir\":\"v\",\"len\":3,\"row\":4},{\"dir\":\"v\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":2,\"row\":5}],\"state\":[1,2,0,0,3,0,4,0,2,0,3],\"target\":{\"index\":1,\"position\":4}}" https://esc-block.herokuapp.com/backtrack-length`
- - > `curl -X GET -d "{\"board\":[{\"dir\":\"h\",\"len\":2,\"row\":1},{\"dir\":\"h\",\"len\":2,\"row\":2},{\"dir\":\"h\",\"len\":3,\"row\":3},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":3,\"row\":0},{\"dir\":\"v\",\"len\":2,\"row\":2},{\"dir\":\"v\",\"len\":2,\"row\":3},{\"dir\":\"v\",\"len\":3,\"row\":4},{\"dir\":\"v\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":2,\"row\":5}],\"state\":[1,2,0,0,3,0,4,0,2,0,3],\"target\":{\"index\":1,\"position\":4}}" https://esc-block.herokuapp.com/length`
+ - > `curl -X POST -d "{\"board\":[{\"dir\":\"h\",\"len\":2,\"row\":1},{\"dir\":\"h\",\"len\":2,\"row\":2},{\"dir\":\"h\",\"len\":3,\"row\":3},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":3,\"row\":0},{\"dir\":\"v\",\"len\":2,\"row\":2},{\"dir\":\"v\",\"len\":2,\"row\":3},{\"dir\":\"v\",\"len\":3,\"row\":4},{\"dir\":\"v\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":2,\"row\":5}],\"state\":[1,2,0,0,3,0,4,0,2,0,3],\"target\":{\"index\":1,\"position\":4}}" https://esc-block.herokuapp.com/backtrack`
+ - > `curl -X POST -d "{\"board\":[{\"dir\":\"h\",\"len\":2,\"row\":1},{\"dir\":\"h\",\"len\":2,\"row\":2},{\"dir\":\"h\",\"len\":3,\"row\":3},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":3,\"row\":0},{\"dir\":\"v\",\"len\":2,\"row\":2},{\"dir\":\"v\",\"len\":2,\"row\":3},{\"dir\":\"v\",\"len\":3,\"row\":4},{\"dir\":\"v\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":2,\"row\":5}],\"state\":[1,2,0,0,3,0,4,0,2,0,3],\"target\":{\"index\":1,\"position\":4}}" https://esc-block.herokuapp.com/backtrack-length`
+ - > `curl -X POST -d "{\"board\":[{\"dir\":\"h\",\"len\":2,\"row\":1},{\"dir\":\"h\",\"len\":2,\"row\":2},{\"dir\":\"h\",\"len\":3,\"row\":3},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":3,\"row\":0},{\"dir\":\"v\",\"len\":2,\"row\":2},{\"dir\":\"v\",\"len\":2,\"row\":3},{\"dir\":\"v\",\"len\":3,\"row\":4},{\"dir\":\"v\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":2,\"row\":5}],\"state\":[1,2,0,0,3,0,4,0,2,0,3],\"target\":{\"index\":1,\"position\":4}}" https://esc-block.herokuapp.com/length`
 
 ### Build project
 > stack setup
@@ -27,9 +27,9 @@
 | Description      | Path              | Method | Req body | Example
 |:-----------------|:------------------|:-------|:--------:|:-
 | Information      | /                 | get    | -        | `curl http://localhost:5000/`
-| Solution         | /backtrack        | get    | json     | `curl -X GET -d @test/01.json http://localhost:5000/backtrack`
-| Number of steps  | /backtrack-length | get    | json     | `curl -X GET -d @test/01.json http://localhost:5000/backtrack-length`
-| Number of states | /length           | get    | json     | `curl -X GET -d @test/01.json http://localhost:5000/length`
+| Solution         | /backtrack        | post   | json     | `curl -X POST -d @test/01.json http://localhost:5000/backtrack`
+| Number of steps  | /backtrack-length | post   | json     | `curl -X POST -d @test/01.json http://localhost:5000/backtrack-length`
+| Number of states | /length           | post   | json     | `curl -X POST -d @test/01.json http://localhost:5000/length`
 
 ### Board example
 
@@ -90,7 +90,7 @@ start: [1,2,0,0,3,0,4,0,2,0,3]
 
 ### Request
 ```
-curl -X GET -d @test/01.json http://localhost:5000/backtrack
+curl -X POST -d @test/01.json http://localhost:5000/backtrack
 ```
 
 ### Response
@@ -141,6 +141,7 @@ curl -X GET -d @test/01.json http://localhost:5000/backtrack
 > heroku apps:info esc-block
 > heroku container
 > heroku container:login
+> cd prod
 > heroku container:push web --app esc-block
 > heroku ps:scale web=1 --app esc-block
 > heroku apps:info esc-block
@@ -164,9 +165,10 @@ curl -X GET -d @test/01.json http://localhost:5000/backtrack
 - exit container
 - copy binary from container to the prod directory:
   - docker cp esc-block:/opt/escape-block-rest/bin/escape-block-rest-exe ./prod/escape-block-rest-exe
-- build prod image:
+- build prod image (optionally):
   - cd prod/
   - docker build -t esc-block-prod .
 - deploy to heroku:
+  - cd prod/
   - heroku container:login
   - heroku container:push web --app esc-block

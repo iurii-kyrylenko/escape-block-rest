@@ -1,6 +1,5 @@
 import State
 import Bfs
-import Control.Exception
 
 board1 = [ -- ┌───┬───┬───┬───┬───┬───┐
     H 2 1  -- │ 1 │   │   │ 3 │   │ 5 │
@@ -111,30 +110,38 @@ bt6 = bfsBacktrack (nextState board6) ((4 ==) . (!! 2)) startState6 -- length bt
 display :: [State] -> IO ()
 display = sequence_ . fmap (putStrLn . show)
 
+eq :: (Eq a, Show a) => String -> a -> a -> IO ()
+eq s x y = do
+  let act = "actual " ++ show x
+  putStr $ s ++ ": "
+  if x == y
+    then putStrLn "ok"
+    else error act
+
 main :: IO ()
 main = do
   putStrLn ""
   putStrLn "---- all states length ----"
-  putStrLn $ assert (length allStates1 == 1799) "length allStates1 == 1799"
-  putStrLn $ assert (length allStates2 == 8859) "length allStates2 == 8859"
-  putStrLn $ assert (length allStates3 == 15651) "length allStates3 == 15651"
-  putStrLn $ assert (length allStates4 == 5297) "length allStates4 == 5297"
-  putStrLn $ assert (length allStates5 == 6761) "length allStates5 == 6761"
-  putStrLn $ assert (length allStates5 == 10636) "length allStates6 == 10636"
+  eq "length allStates1 == 1799" (length allStates1) 1799
+  eq "length allStates2 == 8859" (length allStates2) 8859
+  eq "length allStates3 == 15651" (length allStates3) 15651
+  eq "length allStates4 == 5297" (length allStates4) 5297
+  eq "length allStates5 == 6761" (length allStates5) 6761
+  eq "length allStates6 == 10636" (length allStates6) 10636
   putStrLn "---- back track length ----"
-  putStrLn $ assert (length bt1 == 17) "length bt1 == 17"
-  putStrLn $ assert (length bt2 == 28) "length bt2 == 28"
-  putStrLn $ assert (length bt3 == 19) "length bt3 == 19"
-  putStrLn $ assert (length bt4 == 11) "length bt4 == 11"
-  putStrLn $ assert (length bt5 == 27) "length bt5 == 27"
-  putStrLn $ assert (length bt6 == 26) "length bt6 == 26"
+  eq "length bt1 == 17" (length bt1) 17
+  eq "length bt2 == 28" (length bt2) 28
+  eq "length bt3 == 19" (length bt3) 19
+  eq "length bt4 == 11" (length bt4) 11
+  eq "length bt5 == 27" (length bt5) 27
+  eq "length bt6 == 26" (length bt6) 26
   putStrLn "---- exit condition -------"
-  putStrLn $ assert (bt1 !! 16 !! 1 == 4) "bt1 !! 16 !! 1 == 4"
-  putStrLn $ assert (bt2 !! 27 !! 1 == 4) "bt2 !! 27 !! 1 == 4"
-  putStrLn $ assert (bt3 !! 18 !! 1 == 4) "bt3 !! 18 !! 1 == 4"
-  putStrLn $ assert (bt4 !! 10 !! 1 == 4) "bt4 !! 10 !! 1 == 4"
-  putStrLn $ assert (bt5 !! 26 !! 2 == 4) "bt5 !! 26 !! 2 == 4"
-  putStrLn $ assert (bt6 !! 25 !! 2 == 4) "bt6 !! 25 !! 2 == 4"
+  eq "bt1 !! 16 !! 1 == 4" (bt1 !! 16 !! 1) 4
+  eq "bt2 !! 27 !! 1 == 4" (bt2 !! 27 !! 1) 4
+  eq "bt3 !! 18 !! 1 == 4" (bt3 !! 18 !! 1) 4
+  eq "bt4 !! 10 !! 1 == 4" (bt4 !! 10 !! 1) 4
+  eq "bt5 !! 26 !! 2 == 4" (bt5 !! 26 !! 2) 4
+  eq "bt6 !! 25 !! 2 == 4" (bt6 !! 25 !! 2) 4
   putStrLn "---- back track 4 ---------"
   display bt4
   putStrLn "---------------------------"

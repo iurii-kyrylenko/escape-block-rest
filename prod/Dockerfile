@@ -1,4 +1,4 @@
-FROM heroku/heroku:16
+FROM heroku/heroku:18
 RUN mkdir -p /opt/bin
 COPY ./escape-block-rest-exe /opt/bin/escape-block-rest-exe
 EXPOSE 5000

@@ -116,59 +116,36 @@ curl -X POST -d @test/01.json http://localhost:5000/backtrack
 ]
 ```
 
-### Build docker image (esc-block)
-> docker build -t esc-block .
+### Build stack image
+> docker build -t stack .
 
-### Start new container from the esc-block image
-> docker run -p 5000:5000 -d --name esc-block esc-block
+### Run stack container
+> docker run --name stack -v $(pwd):/mnt -it -d stack bash
+
+### Start bash session in stack container:
+> docker exec -it stack bash
+
+### Build app in container
+> cd /mnt/...
+
+> stack build
 
 ### Copy executable from container to the prod direcory
-> docker cp esc-block:/opt/escape-block-rest/bin/escape-block-rest-exe ./prod/escape-block-rest-exe
+> cp .stack-work/.../bin/escape-block-rest-exe prod/
 
-### Build production docker image (esc-block-prod)
+### Build production docker image (esc-block-prod) - for testing locally
 > cd prod
 
 > docker build -t esc-block-prod .
 
-### Start new container from the esc-block-prod image
+### Start new container from the esc-block-prod image - for testing locally
 > docker run -p 5000:5000 -d --name esc-block-prod esc-block-prod
 
 ### Deploy on Heroku (https://arow.info/blog/posts/2017-03-30-servant-on-heroku.html)
-```
-> heroku plugins:install heroku-container-registry
-> heroku login
-> heroku apps:create esc-block
-> heroku apps:info esc-block
-> heroku container
+> cd prod/
+
 > heroku container:login
-> cd prod
+
 > heroku container:push web --app esc-block
-> heroku ps:scale web=1 --app esc-block
-> heroku apps:info esc-block
-```
-### Dev cycle
-- make changes and test on dev host
-- run container with dev environment:
-  - docker run -d --name esc-block esc-block
-- stop container:
-  - docker stop esc-block
-- copy changes from dev host to container, e.g.:
-  - docker cp ./escape-block-rest.cabal esc-block:/opt/escape-block-rest/src/escape-block-rest.cabal
-  - docker cp ./src/Server.hs esc-block:/opt/escape-block-rest/src/src/Server.hs
-- start container:
-  - docker start esc-block
-- go inside container:
-  - docker exec -it esc-block bash
-- build app inside container: stack build
-- install app binary inside container:
-  - stack --local-bin-path /opt/escape-block-rest/bin install
-- exit container
-- copy binary from container to the prod directory:
-  - docker cp esc-block:/opt/escape-block-rest/bin/escape-block-rest-exe ./prod/escape-block-rest-exe
-- build prod image (optionally):
-  - cd prod/
-  - docker build -t esc-block-prod .
-- deploy to heroku:
-  - cd prod/
-  - heroku container:login
-  - heroku container:push web --app esc-block
+
+> heroku container:release web --app esc-block

@@ -45,7 +45,7 @@ routes = do
 
   -- curl http://localhost:5000/
   W.get "/" $ do
-    W.text "=== ESCAPE BLOCK SOLVER ==="
+    W.text "=== ESCAPE-BLOCK PUZZLE SOLVER ===\n"
 
   -- curl -X POST -d @test/01.json http://localhost:5000/backtrack
   W.post "/backtrack" $ do

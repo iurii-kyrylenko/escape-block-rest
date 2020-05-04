@@ -1,37 +1,66 @@
 # ESCAPE BLOCK puzzle solver & REST API
 
-## Escape Block Puzzle | Breadth First Search Algorithm | Haskell | REST API based on [Scotty](https://github.com/scotty-web/scotty) and [Aeson](https://github.com/bos/aeson)
+### Escape Block Puzzle | Breadth First Search Algorithm | Haskell | REST API based on [Scotty](https://github.com/scotty-web/scotty) and [Aeson](https://github.com/bos/aeson)
 
-## [Demo](https://iurii-kyrylenko.github.io/escape-block-react)
+### [Demo](https://iurii-kyrylenko.github.io/escape-block-react)
  - > https://esc-block.herokuapp.com/
  - > `curl -X POST -d "{\"board\":[{\"dir\":\"h\",\"len\":2,\"row\":1},{\"dir\":\"h\",\"len\":2,\"row\":2},{\"dir\":\"h\",\"len\":3,\"row\":3},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":3,\"row\":0},{\"dir\":\"v\",\"len\":2,\"row\":2},{\"dir\":\"v\",\"len\":2,\"row\":3},{\"dir\":\"v\",\"len\":3,\"row\":4},{\"dir\":\"v\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":2,\"row\":5}],\"state\":[1,2,0,0,3,0,4,0,2,0,3],\"target\":{\"index\":1,\"position\":4}}" https://esc-block.herokuapp.com/backtrack`
  - > `curl -X POST -d "{\"board\":[{\"dir\":\"h\",\"len\":2,\"row\":1},{\"dir\":\"h\",\"len\":2,\"row\":2},{\"dir\":\"h\",\"len\":3,\"row\":3},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":3,\"row\":0},{\"dir\":\"v\",\"len\":2,\"row\":2},{\"dir\":\"v\",\"len\":2,\"row\":3},{\"dir\":\"v\",\"len\":3,\"row\":4},{\"dir\":\"v\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":2,\"row\":5}],\"state\":[1,2,0,0,3,0,4,0,2,0,3],\"target\":{\"index\":1,\"position\":4}}" https://esc-block.herokuapp.com/backtrack-length`
  - > `curl -X POST -d "{\"board\":[{\"dir\":\"h\",\"len\":2,\"row\":1},{\"dir\":\"h\",\"len\":2,\"row\":2},{\"dir\":\"h\",\"len\":3,\"row\":3},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"h\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":3,\"row\":0},{\"dir\":\"v\",\"len\":2,\"row\":2},{\"dir\":\"v\",\"len\":2,\"row\":3},{\"dir\":\"v\",\"len\":3,\"row\":4},{\"dir\":\"v\",\"len\":2,\"row\":5},{\"dir\":\"v\",\"len\":2,\"row\":5}],\"state\":[1,2,0,0,3,0,4,0,2,0,3],\"target\":{\"index\":1,\"position\":4}}" https://esc-block.herokuapp.com/length`
 
-### Build project
-> stack setup
 
+### Containerize haskell stack
+
+#### Build docker image for haskell stack
+> docker build -t hstack .
+
+#### Run container from the image:
+> cd <shared dir>
+
+> docker run --name hstack -v $(pwd):/mnt -p 5000:5000 -it hstack bash
+
+
+### Work inside container
+
+#### Go to project directory
+> cd /mnt/<project dir>
+
+#### Build project
 > stack build
 
-### Run server
+#### Run server
 > stack exec escape-block-rest-exe
 
-### Run tests
+#### Run tests
 > stack test
 
-### Run REPL
+#### Run REPL
 > stack ghci
+
+#### Copy executable to prod
+> cp $(stack exec -- which escape-block-rest-exe) prod/
+
+
+### Deploy on Heroku
+> cd prod/
+
+> heroku container:login
+
+> heroku container:push web --app esc-block
+
+> heroku container:release web --app esc-block
+
 
 ### Endpoints
 
 | Description      | Path              | Method | Req body | Example
 |:-----------------|:------------------|:-------|:--------:|:-
-| Information      | /                 | get    | -        | `curl http://localhost:5000/`
-| Solution         | /backtrack        | post   | json     | `curl -X POST -d @test/01.json http://localhost:5000/backtrack`
-| Number of steps  | /backtrack-length | post   | json     | `curl -X POST -d @test/01.json http://localhost:5000/backtrack-length`
-| Number of states | /length           | post   | json     | `curl -X POST -d @test/01.json http://localhost:5000/length`
+| Information      | /                 | get    | -        | `curl https://esc-block.herokuapp.com/`
+| Solution         | /backtrack        | post   | json     | `curl -X POST -d @test/01.json https://esc-block.herokuapp.com/backtrack`
+| Number of steps  | /backtrack-length | post   | json     | `curl -X POST -d @test/01.json https://esc-block.herokuapp.com/backtrack-length`
+| Number of states | /length           | post   | json     | `curl -X POST -d @test/01.json https://esc-block.herokuapp.com/length`
 
-### Board example
+### Board examples
 
 ```
 start: [1,2,0,0,3,0,4,0,2,0,3]
@@ -115,37 +144,3 @@ curl -X POST -d @test/01.json http://localhost:5000/backtrack
   [0,4,1,0,2,2,0,0,3,0,4]  // finish state
 ]
 ```
-
-### Build stack image
-> docker build -t stack .
-
-### Run stack container
-> docker run --name stack -v $(pwd):/mnt -it -d stack bash
-
-### Start bash session in stack container:
-> docker exec -it stack bash
-
-### Build app in container
-> cd /mnt/...
-
-> stack build
-
-### Copy executable from container to the prod direcory
-> cp .stack-work/.../bin/escape-block-rest-exe prod/
-
-### Build production docker image (esc-block-prod) - for testing locally
-> cd prod
-
-> docker build -t esc-block-prod .
-
-### Start new container from the esc-block-prod image - for testing locally
-> docker run -p 5000:5000 -d --name esc-block-prod esc-block-prod
-
-### Deploy on Heroku (https://arow.info/blog/posts/2017-03-30-servant-on-heroku.html)
-> cd prod/
-
-> heroku container:login
-
-> heroku container:push web --app esc-block
-
-> heroku container:release web --app esc-block

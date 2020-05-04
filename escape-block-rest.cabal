@@ -1,49 +1,82 @@
-name:                escape-block-rest
-version:             0.1.0.0
--- synopsis:
--- description:
-homepage:            https://github.com/iurii-kyrylenko/escape-block-rest#readme
-license:             BSD3
-license-file:        LICENSE.md
-author:              Iurii Kyrylenko
-maintainer:          https://github.com/iurii-kyrylenko
-copyright:           2017 Iurii Kyrylenko
-category:            Web
-build-type:          Simple
-extra-source-files:  README.md
-cabal-version:       >=1.10
+cabal-version: 1.12
 
-library
-  hs-source-dirs:      src
-  exposed-modules:     Server
-                     , Bfs
-                     , State
-  build-depends:       base >= 4.7 && < 5
-                     , scotty
-                     , aeson
-                     , hashmap
-                     , containers
-                     , read-env-var
-                     , wai-cors
-  default-language:    Haskell2010
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 2d56d10af309cef1b1259c807a177403226567537f7ed1f3abf77290f3c032a8
 
-executable escape-block-rest-exe
-  hs-source-dirs:      app
-  main-is:             Main.hs
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
-  build-depends:       base
-                     , escape-block-rest
-  default-language:    Haskell2010
-
-test-suite escape-block-rest-test
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test
-  main-is:             Spec.hs
-  build-depends:       base
-                     , escape-block-rest
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
-  default-language:    Haskell2010
+name:           escape-block-rest
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/iurii-kyrylenko/escape-block-rest#readme>
+homepage:       https://github.com/iurii-kyrylenko/escape-block-rest#readme
+bug-reports:    https://github.com/iurii-kyrylenko/escape-block-rest/issues
+author:         Iurii Kyrylenko
+maintainer:     https://github.com/iurii-kyrylenko
+copyright:      2020 Iurii Kyrylenko
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
 
 source-repository head
-  type:     git
+  type: git
   location: https://github.com/iurii-kyrylenko/escape-block-rest
+
+library
+  exposed-modules:
+      Bfs
+      Server
+      State
+  other-modules:
+      Paths_escape_block_rest
+  hs-source-dirs:
+      src
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , containers
+    , hashmap
+    , read-env-var
+    , scotty
+    , wai-cors
+  default-language: Haskell2010
+
+executable escape-block-rest-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_escape_block_rest
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , containers
+    , escape-block-rest
+    , hashmap
+    , read-env-var
+    , scotty
+    , wai-cors
+  default-language: Haskell2010
+
+test-suite escape-block-rest-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_escape_block_rest
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , containers
+    , escape-block-rest
+    , hashmap
+    , read-env-var
+    , scotty
+    , wai-cors
+  default-language: Haskell2010

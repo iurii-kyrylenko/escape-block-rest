@@ -15,7 +15,7 @@
 > docker build -t hstack .
 
 #### Run container from the image:
-> cd <shared dir>
+> cd \<shared dir\>
 
 > docker run --name hstack -v $(pwd):/mnt -p 5000:5000 -it hstack bash
 
@@ -23,7 +23,7 @@
 ### Work inside container
 
 #### Go to project directory
-> cd /mnt/<project dir>
+> cd /mnt/\<project dir\>
 
 #### Build project
 > stack build

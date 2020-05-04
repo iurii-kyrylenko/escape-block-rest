@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2d56d10af309cef1b1259c807a177403226567537f7ed1f3abf77290f3c032a8
+-- hash: 51e4c48d85730b0c6a4ec824ea5de6e172131484570279b6d3bc9110df036be8
 
 name:           escape-block-rest
-version:        0.1.0.0
+version:        0.1.1.0
 description:    Please see the README on GitHub at <https://github.com/iurii-kyrylenko/escape-block-rest#readme>
 homepage:       https://github.com/iurii-kyrylenko/escape-block-rest#readme
 bug-reports:    https://github.com/iurii-kyrylenko/escape-block-rest/issues
